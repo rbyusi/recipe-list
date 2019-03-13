@@ -1,5 +1,130 @@
-$color: black;
+$background-shade: rgb(214, 214, 214);
+$blue: rgba(0, 110, 255, 0.685);
 
-.recipeList{
-    color: $black;
+.container{
+    box-sizing: border-box;
+    margin: auto;
+    padding: 20%, 20%,20%, 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.recipe-container{
+    box-sizing: border-box;
+    width: 100%;
+   }
+.name-list{
+    
+    margin-bottom: 10px;
+    margin-top: 40px;
+
+    section {
+        box-sizing: border-box;
+        display: flex;
+        border: solid 3px $blue;
+        flex-flow: column;
+        width: 100%;
+        padding: 0px;
+        border-radius: 5px;
+        
+        ul {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+
+            :last-child{
+                border-bottom-left-radius: 2px;
+                border-bottom-right-radius: 2px;
+            }
+        }
+
+        li {
+            display: block;
+        }
+
+        li:hover{
+            background-color: #464ca367;
+        } 
+
+        .selected {
+            background-color: rgba(86, 132, 216, 0.651);
+            color: white;
+        }
+        
+        button {
+            background: none;
+            border: none;
+            color: white;
+            outline: none;
+
+        }
+
+        button:hover{
+            color: lightblue;
+        }
+    }
+
+    
+}
+
+.section-title{
+    width: 100%;
+    text-align: left;
+    background: $blue;
+    color: white;
+    height: 24px;
+}
+.recipe-details{
+
+    box-sizing: border-box;
+    margin: 0;
+    border: solid 3px $blue;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    section {
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        padding: 0px;
+        border-radius: 5px;
+    }
+
+    ul,ol{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li{
+            padding: 0;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+
+        :nth-child(even){
+            background: rgba(188, 211, 255, 0.562);
+        }
+
+        :nth-child(odd){
+            background: rgba(163, 171, 214, 0.342);
+        }
+    }
+
+    ol {
+
+
+        li {
+        
+            box-sizing: border-box;
+            list-style-type: decimal;
+            list-style-position: inside;
+            padding: 0;
+            padding-left:10px;
+
+        }
+    }
+
 }
