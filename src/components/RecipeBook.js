@@ -83,11 +83,14 @@ class App  extends React.Component{
 
     deleteItem = (event) => {
         event.preventDefault()
-        const updatedArr = this.state.recipeList.filter(item => item.id !== this.state.selectedRecipe)
-        localStorage.setItem('recipe', JSON.stringify(updatedArr))
-        this.checkStorage()
-        this.checkFirstItem()
-        console.log(updatedArr);
+
+        if(this.state.recipeList.length !== 0){
+            const updatedArr = this.state.recipeList.filter(item => item.id !== this.state.selectedRecipe)
+            localStorage.setItem('recipe', JSON.stringify(updatedArr))
+            this.checkStorage()
+            this.checkFirstItem()
+            console.log(updatedArr);
+        }
 
     }
     

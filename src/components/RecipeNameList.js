@@ -30,7 +30,7 @@ class RecipeNameList extends Component {
                   onClick={this.props.openModal} >
                   +
                 </button>
-                <button onClick={()=>this.props.deleteItem()} >
+                <button onClick={this.props.deleteItem} >
                   x
                 </button>
               </span>
