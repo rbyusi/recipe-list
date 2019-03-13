@@ -78,6 +78,7 @@ class App  extends React.Component{
             this.setState({recipeList: forUpload})
         }
         this.checkStorage()
+        this.checkFirstItem()
         this.setState({modal: !this.state.modal})
     }   
 
@@ -91,6 +92,8 @@ class App  extends React.Component{
             this.checkFirstItem()
             console.log(updatedArr);
         }
+        this.checkStorage()
+        this.checkFirstItem()
 
     }
     
