@@ -23,8 +23,8 @@ class AddRecipe extends Component {
                         </FormGroup>
                     </ModalBody>
                     <ModalFooter>
-                        <Button name="addRecipe" color="primary" onClick={this.props.addRecipe}>Add Recipe</Button>
-                        <Button color="secondary" onClick={this.props.openModal}>Cancel</Button>
+                        <Button   color="primary" onClick={this.props.addRecipe}>{this.props.buttonLabel}</Button>
+                        <Button color="secondary"  onClick={this.props.openModal}>Cancel</Button>
                     </ModalFooter>
                 </Form>
             </Modal>
@@ -38,7 +38,8 @@ AddRecipe.propTypes = {
     addRecipe: propTypes.func.isRequired,
     handleChange: propTypes.func.isRequired,
     modal: propTypes.bool.isRequired,
-    openModal: propTypes.func.isRequired
+    openModal: propTypes.func.isRequired,
+    buttonLabel: propTypes.string.isRequired
 }
 
 export default AddRecipe;

@@ -21,16 +21,24 @@ class RecipeNameList extends Component {
                 </li>
           )  
      });
-
     return(
         <div className="name-list">
             <section>
               <span className="section-title">Recipes
-                <button 
+                <button
+                  value="Add" 
                   onClick={this.props.openModal} >
                   +
                 </button>
-                <button onClick={this.props.deleteItem} >
+                <button 
+                  value="Edit"
+                  hidden={this.props.recipeList.length === 0 && true }
+                  onClick={this.props.openModal} >
+                  ...
+                </button>
+                <button
+                  value="Delete"
+                  onClick={this.props.deleteItem} >
                   x
                 </button>
               </span>
@@ -50,7 +58,7 @@ RecipeNameList.propTypes = {
    nameClick: propTypes.func.isRequired,
    selectedId: propTypes.string.isRequired,
    openModal: propTypes.func.isRequired,
-   deleteItem: propTypes.func.isRequired
+   deleteItem: propTypes.func.isRequired,
 }
 
 export default RecipeNameList

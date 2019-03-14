@@ -12,7 +12,8 @@ class App  extends React.Component{
             instructions: "",
             recipeList: [],
             selectedRecipe: "",
-            modal: false
+            modal: false,
+            action: ""
 
         }
     }
@@ -42,7 +43,20 @@ class App  extends React.Component{
 
     openModal = (event) =>{
         event.preventDefault()
-        this.setState({modal: !this.state.modal})
+        this.clearState()
+        this.setState({
+            modal: !this.state.modal,
+            action: event.target.value
+        })
+        
+        if(event.target.value === "Edit" && this.state.selectedRecipe.length > 0){
+          const selRecipe = this.state.recipeList.find(item=>item.id === this.state.selectedRecipe)
+            this.setState({
+                name: selRecipe.name,
+                ingredients: selRecipe.ingredients,
+                instructions: selRecipe.instructions
+            })
+        }
     }
 
     handleChange = (event) => {
@@ -68,15 +82,30 @@ class App  extends React.Component{
         event.preventDefault()
         const id = 1 + Math.random()
         const recipeList = this.state.recipeList
-        const {name, ingredients, instructions} = this.state
+        const {name, ingredients, instructions, selectedRecipe, action} = this.state
     
         if(name.trim().length > 0 && ingredients.trim().length > 0 && instructions.trim().length > 0){
-            const recipe = Object.assign({}, {id: id.toString(), name: name, ingredients: ingredients, instructions: instructions})
-            const forUpload = recipeList.concat(recipe)
-            localStorage.setItem('recipe', JSON.stringify(forUpload))
-            this.clearState()
-            this.setState({recipeList: forUpload})
+            
+            if(action === "Add") {
+                const recipe = Object.assign({}, {id: id.toString(), name: name, ingredients: ingredients, instructions: instructions})
+                const forUpload = recipeList.concat(recipe)
+                localStorage.setItem('recipe', JSON.stringify(forUpload))
+                this.clearState()
+                this.setState({recipeList: forUpload})
+                
+            } else if (action === "Edit") {
+                const recipe = Object.assign({}, {id: selectedRecipe, name: name, ingredients: ingredients, instructions: instructions})
+                const index = this.state.recipeList.findIndex(item=>item.id === this.state.selectedRecipe)
+                recipeList.splice(index,1,recipe)
+                
+                localStorage.setItem('recipe', JSON.stringify(recipeList))
+                this.clearState()
+                this.setState({recipeList: recipeList})
+            
+            }   
+        
         }
+
         this.checkStorage()
         this.checkFirstItem()
         this.setState({modal: !this.state.modal})
@@ -106,6 +135,8 @@ class App  extends React.Component{
                         handleChange={this.handleChange}
                         modal={this.state.modal}
                         openModal={this.openModal}
+                        selectedRecipe={this.state.selectedRecipe}
+                        buttonLabel={this.state.action}
                         addRecipe={this.addRecipe}/>
                 </div>
                 <div className="recipe-container">
