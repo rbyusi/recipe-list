@@ -28,8 +28,8 @@ class App  extends React.Component{
     }
 
     checkFirstItem = ()=> {
-        if (this.state.recipeList.length >= 1){
-            const firstItem = this.state.recipeList.shift()
+        const firstItem = JSON.parse(localStorage.getItem("recipe")).shift()
+        if (this.state.recipeList.length > 0 && firstItem !== undefined){
             this.setState({selectedRecipe: firstItem.id})
         }
 
@@ -38,7 +38,6 @@ class App  extends React.Component{
         if(localStorage.getItem("recipe")){
         this.setState({recipeList: JSON.parse(localStorage.getItem("recipe"))})
      }
-     
     }
 
     openModal = (event) =>{
@@ -93,9 +92,10 @@ class App  extends React.Component{
                 this.clearState()
                 this.setState({recipeList: forUpload})
                 
-                if(recipeList.length ===0){
+                if(recipeList.length === 0){
                     this.setState({selectedRecipe: id.toString()})
                 }
+
             } else if (action === "Edit") {
                 const recipe = Object.assign({}, {id: selectedRecipe, name: name, ingredients: ingredients, instructions: instructions})
                 const index = this.state.recipeList.findIndex(item=>item.id === this.state.selectedRecipe)
@@ -119,9 +119,12 @@ class App  extends React.Component{
         if(this.state.recipeList.length !== 0){
             const updatedArr = this.state.recipeList.filter(item => item.id !== this.state.selectedRecipe)
             localStorage.setItem('recipe', JSON.stringify(updatedArr))
+            this.checkFirstItem()
         }
+
         this.checkFirstItem()
         this.checkStorage()
+
     }
     
     render(){
