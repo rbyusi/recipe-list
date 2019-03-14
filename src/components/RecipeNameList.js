@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 class RecipeNameList extends Component {
   render() { 
     const recipeList = this.props.recipeList
+    
     const list = recipeList.map((recipe,i)=>{ 
         const classSel = () =>{
           if(i === 0 && this.props.selectedId.length === 0){

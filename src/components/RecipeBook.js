@@ -93,6 +93,9 @@ class App  extends React.Component{
                 this.clearState()
                 this.setState({recipeList: forUpload})
                 
+                if(recipeList.length ===0){
+                    this.setState({selectedRecipe: id.toString()})
+                }
             } else if (action === "Edit") {
                 const recipe = Object.assign({}, {id: selectedRecipe, name: name, ingredients: ingredients, instructions: instructions})
                 const index = this.state.recipeList.findIndex(item=>item.id === this.state.selectedRecipe)
@@ -112,18 +115,13 @@ class App  extends React.Component{
     }   
 
     deleteItem = (event) => {
-        event.preventDefault()
-
+        event.preventDefault() 
         if(this.state.recipeList.length !== 0){
             const updatedArr = this.state.recipeList.filter(item => item.id !== this.state.selectedRecipe)
             localStorage.setItem('recipe', JSON.stringify(updatedArr))
-            this.checkStorage()
-            this.checkFirstItem()
-            console.log(updatedArr);
         }
-        this.checkStorage()
         this.checkFirstItem()
-
+        this.checkStorage()
     }
     
     render(){
