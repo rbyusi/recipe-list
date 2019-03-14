@@ -14,7 +14,7 @@ class AddRecipe extends Component {
                             <Input type="text" name="name" value={this.props.list.name}  onChange={this.props.handleChange} />
                         </FormGroup>
                         <FormGroup>
-                            <Label>ingredients</Label>
+                            <Label>Ingredients</Label>
                             <Input type="textarea" name="ingredients" value={this.props.list.ingredients} onChange={this.props.handleChange}/>
                         </FormGroup>
                         <FormGroup>
